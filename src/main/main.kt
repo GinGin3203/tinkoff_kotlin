@@ -31,4 +31,8 @@ fun main() {
     println(queue_2)
     queue_2 = queueOf("elephant")
     println(queue_2)
+
+    // toString for empty container
+    queue_2.dequeue()
+    println(queue_2)
 }

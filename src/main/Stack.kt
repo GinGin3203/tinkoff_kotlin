@@ -5,19 +5,14 @@ import java.util.*
 class Stack<T> {
     private val storage: LinkedList<T> = LinkedList()
 
-    fun push(element: T) {
-        storage.addLast(element)
-    }
+    fun push(element: T) = storage.addLast(element)
 
-    fun pop(): T {
-        return storage.removeLast()
-    }
 
-    override fun toString(): String {
-        if (storage.isEmpty())
-            return storage.toString()
-        return "HEAD " + storage.toString().replace(",", " ->")
-    }
+    fun pop(): T = storage.removeLast()
+
+
+    override fun toString(): String = if (storage.isEmpty()) storage.toString()
+    else "HEAD " + storage.toString().replace(",", " ->")
 }
 
 fun <T> stackOf(vararg elems: T): Stack<T> {
