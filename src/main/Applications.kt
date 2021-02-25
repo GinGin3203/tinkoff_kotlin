@@ -1,6 +1,10 @@
 import kotlin.random.Random
 
 abstract class Application {
+    protected abstract val name: String
+    protected abstract val applicationType: String
+    protected abstract val purpose: String
+    protected abstract val features: HashSet<String>
 
     open fun about() {
         println(getDescription())
@@ -24,20 +28,15 @@ abstract class Application {
         println("My features include but are not limited to: $features")
     }
 
-    protected abstract val name: String
-    protected abstract val applicationType: String
-    protected abstract val purpose: String
-    protected abstract val features: HashSet<String>
 }
 
 class TextEditor(override val name: String, override val features: HashSet<String>) : Application() {
-    fun makeCoolEdit(text: String): String {
-        return text.reversed()
-    }
-
     override val applicationType: String = "text editor"
     override val purpose: String = "editing text"
 
+    fun makeCoolEdit(text: String): String {
+        return text.reversed()
+    }
 }
 
 class MediaGallery(
@@ -45,6 +44,9 @@ class MediaGallery(
     private val supportedFileFormat: String,
     override val features: HashSet<String>
 ) : Application() {
+    override val applicationType: String = "media gallery"
+    override val purpose: String = "viewing media"
+    private val seed: Int = 198274
 
     override fun about() {
         println(getDescription() + " I only support files in $supportedFileFormat format")
@@ -55,13 +57,12 @@ class MediaGallery(
     }
 
 
-    override val applicationType: String = "media gallery"
-    override val purpose: String = "viewing media"
-    private val seed: Int = 198274
 }
 
 class IDE(override val name: String, private val primaryLang: String, override val features: HashSet<String>) :
     Application() {
+    override val applicationType: String = "IDE"
+    override val purpose: String = "coding"
 
     override fun about() {
         println(getDescription() + " I was created primarily for the $primaryLang programming language.")
@@ -78,8 +79,4 @@ class IDE(override val name: String, private val primaryLang: String, override v
             .map { allowedChars.random() }
             .joinToString("")
     }
-
-
-    override val applicationType: String = "IDE"
-    override val purpose: String = "coding"
 }
