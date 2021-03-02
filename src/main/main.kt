@@ -28,4 +28,9 @@ fun main() {
     // IDE functionality
     idea.about()
     idea.showAnnoyingError()
+    println()
+
+    // List of subclasses
+    val subclass_list = listOf(vim, windowsMediaViewer, idea)
+    subclass_list[1].feature("a")
 }
