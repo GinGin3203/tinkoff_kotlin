@@ -7,6 +7,12 @@ fun main() {
     // Basic functionality
     queue.enqueue(1)
     queue.enqueue(2)
+    queue.enqueue(3)
+
+
+    stack.push(4)
+    stack.push(5)
+    stack.push(6)
     println(queue)
     println(stack)
 
