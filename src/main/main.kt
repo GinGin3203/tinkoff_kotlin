@@ -1,10 +1,5 @@
 package main
 
-import TextEditor
-import MediaGallery
-import IDE
-
-
 fun main() {
 
     // Creating objects
@@ -16,7 +11,6 @@ fun main() {
     )
 
     val idea = IDE("IntelliJ IDEA", "Java", hashSetOf("cool autocompletion", "convenience"))
-
 
     // TextEditor functionality
     vim.about()
