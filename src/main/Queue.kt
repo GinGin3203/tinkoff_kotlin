@@ -3,16 +3,13 @@ package main
 import java.util.*
 
 class Queue<T> {
-    private val storage: LinkedList<T> = LinkedList()
+    private val storage = MySinglyLinkedList<T>()
 
-    fun enqueue(element: T) = storage.addLast(element)
+    fun enqueue(element: T) = storage.insertNode(element, true)
 
+    fun dequeue(): T? = storage.removeFromHead()
 
-    fun dequeue(): T = storage.removeFirst()
-
-
-    override fun toString(): String = if (storage.isEmpty()) storage.toString()
-    else "HEAD " + storage.toString().replace(",", " ->")
+    override fun toString(): String = storage.toString()
 }
 
 fun <T> queueOf(vararg elems: T): Queue<T> {

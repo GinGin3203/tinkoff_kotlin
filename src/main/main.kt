@@ -5,12 +5,8 @@ fun main() {
     val stack = Stack<Int>()
 
     // Basic functionality
-
     queue.enqueue(1)
     queue.enqueue(2)
-
-    stack.push(3)
-    stack.push(4)
     println(queue)
     println(stack)
 

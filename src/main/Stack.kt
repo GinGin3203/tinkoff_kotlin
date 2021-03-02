@@ -3,16 +3,13 @@ package main
 import java.util.*
 
 class Stack<T> {
-    private val storage: LinkedList<T> = LinkedList()
+    private val storage = MySinglyLinkedList<T>()
 
-    fun push(element: T) = storage.addLast(element)
+    fun push(element: T) = storage.insertNode(element, false)
 
+    fun pop(): T? = storage.removeFromHead()
 
-    fun pop(): T = storage.removeLast()
-
-
-    override fun toString(): String = if (storage.isEmpty()) storage.toString()
-    else "HEAD " + storage.toString().replace(",", " ->")
+    override fun toString(): String = storage.toString()
 }
 
 fun <T> stackOf(vararg elems: T): Stack<T> {
