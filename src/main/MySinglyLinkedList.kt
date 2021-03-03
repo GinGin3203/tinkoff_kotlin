@@ -40,15 +40,14 @@ class MySinglyLinkedList<T> {
         return retVal
     }
 
-    override fun toString(): String {
-        val sb = StringBuilder("HEAD [")
+    override fun toString(): String = buildString {
+        this.append("HEAD [")
         var temp = head
         while (temp != null) {
-            sb.append(" " + temp.nodeData)
+            this.append(" " + temp.nodeData)
             temp = temp.next
         }
-        sb.append(" ] TAIL")
-        return sb.toString()
+        this.append(" ] TAIL")
     }
 
     private data class Node<T>(val nodeData: T, var next: Node<T>? = null)
