@@ -5,7 +5,7 @@ import java.util.*
 class Queue<T> {
     private val storage = MySinglyLinkedList<T>()
 
-    fun enqueue(element: T) = storage.insertNode(element, true)
+    fun enqueue(element: T) = storage.insertAtTail(element)
 
     fun dequeue(): T? = storage.removeFromHead()
 

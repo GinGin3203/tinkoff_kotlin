@@ -5,7 +5,7 @@ import java.util.*
 class Stack<T> {
     private val storage = MySinglyLinkedList<T>()
 
-    fun push(element: T) = storage.insertNode(element, false)
+    fun push(element: T) = storage.insertAtHead(element)
 
     fun pop(): T? = storage.removeFromHead()
 

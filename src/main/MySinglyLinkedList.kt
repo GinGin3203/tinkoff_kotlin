@@ -5,25 +5,29 @@ class MySinglyLinkedList<T> {
     private var tail: Node<T>? = null
     private var length: Int = 0
 
-    fun insertNode(data: T, atTail: Boolean) {
-        /**
-         * atTail = 0 - insertion before head
-         * atTail = 1 - insertion after tail
-         */
-        if (tail == null) {
-            head = Node(data)
+    fun insertAtTail(elem: T) {
+        if (tail == null || head == null) {
+            head = Node(elem)
             tail = head
         } else {
-            val newNode = Node(data)
-            if (atTail) {
-                tail!!.next = newNode
-                tail = newNode
-            } else {
-                newNode.next = head
-                head = newNode
-            }
+            val newNode = Node(elem)
+            tail!!.next = newNode
+            tail = newNode
         }
         length++
+    }
+
+    fun insertAtHead(elem: T) {
+        if (tail == null || head == null) {
+            head = Node(elem)
+            tail = head
+        } else {
+            val newNode = Node(elem)
+            newNode.next = head
+            head = newNode
+        }
+
+        length++;
     }
 
     fun removeFromHead(): T? {
