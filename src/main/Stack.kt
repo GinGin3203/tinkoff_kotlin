@@ -19,3 +19,11 @@ fun <T> stackOf(vararg elems: T): Stack<T> {
 
     return st
 }
+
+fun <T> stackOf(elem: T): Stack<T> {
+    val st = Stack<T>()
+    st.push(elem)
+    return st
+}
+
+fun <T> stackOf(): Stack<T> = Stack<T>()

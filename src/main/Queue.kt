@@ -19,3 +19,11 @@ fun <T> queueOf(vararg elems: T): Queue<T> {
 
     return q
 }
+
+fun <T> queueOf(elem: T): Queue<T> {
+    val q = Queue<T>()
+    q.enqueue(elem)
+    return q
+}
+
+fun <T> queueOf(): Queue<T> = Queue()
