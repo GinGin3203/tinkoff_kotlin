@@ -27,7 +27,7 @@ class MySinglyLinkedList<T> {
             head = newNode
         }
 
-        length++;
+        length++
     }
 
     fun removeFromHead(): T? {
