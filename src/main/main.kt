@@ -24,17 +24,17 @@ fun main() {
     println(stack)
 
     // DSL for classes
-    var stack_2 = stackOf("dog", "cat", "giraffe")
-    println(stack_2)
-    stack_2 = stackOf("elephant")
-    println(stack_2)
+    var stackFromDSL = stackOf("dog", "cat", "giraffe")
+    println(stackFromDSL)
+    stackFromDSL = stackOf("elephant")
+    println(stackFromDSL)
 
-    var queue_2 = queueOf("dog", "cat", "giraffe")
-    println(queue_2)
-    queue_2 = queueOf("elephant")
-    println(queue_2)
+    var queueFromDSL = queueOf("dog", "cat", "giraffe")
+    println(queueFromDSL)
+    queueFromDSL = queueOf("elephant")
+    println(queueFromDSL)
 
     // toString for empty container
-    queue_2.dequeue()
-    println(queue_2)
+    queueFromDSL.dequeue()
+    println(queueFromDSL)
 }
