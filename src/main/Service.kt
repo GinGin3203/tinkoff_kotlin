@@ -1,7 +1,5 @@
 package main
 
-import java.util.function.Predicate
-
 class Service {
     fun getSportPants(dao: SportPantsDAO) = dao.getAllData()
 
