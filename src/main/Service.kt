@@ -23,5 +23,5 @@ class Service {
 
     fun groupPantsByMaterial(pants: List<Pants>) = pants.groupBy { it.material }
 
-    fun getNumByCondition(pants: List<Pants>, pred: (T: Pants) -> Boolean) = pants.filter { pred(it) }.size
+    fun getNumByCondition(pants: List<Pants>, pred: (T: Pants) -> Boolean) = pants.count { pred(it) }
 }
