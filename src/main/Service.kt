@@ -20,7 +20,7 @@ class Service {
                     null
             }
 
-    fun sortPantsByColor(pants: List<Pants>) = pants.sortedBy { it.color }
+    fun sortPantsByStore(pants: List<Pants>) = pants.sortedBy { it.store }
 
     fun groupPantsByMaterial(pants: List<Pants>) = pants.groupBy { it.material }
 

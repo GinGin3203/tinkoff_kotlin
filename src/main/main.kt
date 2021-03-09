@@ -8,7 +8,7 @@ fun main() {
     val pants = service.getPants(spDAO, ftDAO)
     println("Merging data source objects result: " + pants)
     println()
-    println("Sorted by color: " + service.sortPantsByColor(pants))
+    println("Sorted by store: " + service.sortPantsByStore(pants))
     println()
     println("Grouped by material: " + service.groupPantsByMaterial(pants))
     println()
