@@ -10,5 +10,5 @@ class SportPantsDAO {
 
     fun getAllData(): List<SportPants> = storage
 
-    fun getByStore(store: String): SportPants = storage.single { it.store == store }
+    fun getByStore(store: String): SportPants? = storage.firstOrNull { it.store == store }
 }

@@ -9,9 +9,12 @@ class Service {
 
     fun getPants(sportPantsDAO: SportPantsDAO,
                  fancyTrousersDAO: FancyTrousersDAO): List<Pants> =
-            getSportPants(sportPantsDAO).map {
-                val obj2 = fancyTrousersDAO.getByStore(it.store)
-                Pants(it.store, it.material, it.coldResistant, obj2.brand, obj2.color)
+            getSportPants(sportPantsDAO).mapNotNull {
+                val ft: FancyTrousers? = fancyTrousersDAO.getByStore(it.store)
+                if (ft != null)
+                    Pants(it.store, it.material, it.coldResistant, ft.brand, ft.color)
+                else
+                    null
             }
 
     fun sortPantsByColor(pants: List<Pants>) = pants.sortedBy { it.color }

@@ -10,5 +10,5 @@ class FancyTrousersDAO {
 
     fun getAllData(): List<FancyTrousers> = storage
 
-    fun getByStore(store: String): FancyTrousers = storage.single { it.store == store }
+    fun getByStore(store: String): FancyTrousers? = storage.firstOrNull { it.store == store }
 }
