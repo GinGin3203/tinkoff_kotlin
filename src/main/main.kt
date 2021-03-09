@@ -4,6 +4,13 @@ fun main() {
     val spDAO = SportPantsDAO()
     val ftDAO = FancyTrousersDAO()
 
+    // DAO demo
+    println("All SportPantsDAO data: " + spDAO.getAllData())
+    println()
+    println("Get by store_42: " + spDAO.getByStore("store_42"))
+    println()
+
+    // Service demo
     val service = Service()
     val pants = service.getPants(spDAO, ftDAO)
     println("Merging data source objects result: " + pants)
