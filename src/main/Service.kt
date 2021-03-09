@@ -7,6 +7,9 @@ class Service {
 
     fun getFancyTrousers(dao: FancyTrousersDAO) = dao.getAllData()
 
+    /*  Такая реализация позволяет джойнить объекты классов 1 и 2 даже если их ключи
+        совпадают не 1 к 1
+     */
     fun getPants(sportPantsDAO: SportPantsDAO,
                  fancyTrousersDAO: FancyTrousersDAO): List<Pants> =
             getSportPants(sportPantsDAO).mapNotNull {
