@@ -9,8 +9,10 @@ class Service {
                  fancyTrousersDAO: FancyTrousersDAO): List<Pants> =
             /*  Такая реализация позволяет джойнить объекты классов 1 и 2 даже если их ключи
                 совпадают не 1 к 1 */
+
             getSportPants(sportPantsDAO).mapNotNull {
                 val ft: FancyTrousers? = fancyTrousersDAO.getByStore(it.store)
+                // Не уверен, как сделать красивее, буду рад, если покажете
                 if (ft != null)
                     Pants(it.store, it.material, it.coldResistant, ft.brand, ft.color)
                 else
