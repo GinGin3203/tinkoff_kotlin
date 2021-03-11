@@ -19,9 +19,9 @@ fun main() {
     println()
     println("Grouped by material: " + service.groupPantsByMaterial(pants))
     println()
-    println("Counting by condition: " + service.getNumByCondition(pants) { it -> it.coldResistant })
+    println("Counting by condition: " + service.getNumByCondition(pants) { it.coldResistant })
     println()
-    println("Counting by another condition: " + service.getNumByCondition(pants) { it -> it.brand == "gucci" })
+    println("Counting by another condition: " + service.getNumByCondition(pants) { it.brand == "gucci" })
 
 
 }
