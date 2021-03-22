@@ -51,7 +51,7 @@ abstract class ScriptsManager {
             }
         }
 
-        val selectByIdScriptTemplate = "select * from IDE where id = ?"
+        val selectByIdScriptTemplate = StringBuilder("select * from TN where id = ?")
 
         /**
         Мб не очень здорово заставлять порядок колонок зависеть от порядка названий полей, но джава не дает никаких

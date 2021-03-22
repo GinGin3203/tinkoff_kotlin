@@ -37,8 +37,8 @@ data class Connection(val db_url: String) {
         val conn = DriverManager.getConnection(db_url)
 
         conn.use {
-            val ps = it.prepareStatement(ScriptsManager.selectByIdScriptTemplate)
-//            ps.setString(1, tableName)
+            val sql = ScriptsManager.selectByIdScriptTemplate.replace(14, 16, tableName)
+            val ps = it.prepareStatement(sql.toString())
             ps.setInt(1, id)
             return ps.executeQuery()
         }
