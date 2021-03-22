@@ -1,9 +1,4 @@
 build/
 .gradle/
-gradle/
 .idea/
-gradle.properties
-gradlew.bat
-settings.gradle.kts
-build.gradle.kts
-gradlew
+my_database.sqlite
