@@ -1,6 +1,6 @@
 package database
 
-import domain_entities.TableContents
+import domain_entities.*
 import java.sql.DriverManager
 import java.sql.Types
 
@@ -32,11 +32,10 @@ data class Connection(val db_url: String) {
         }
     }
 
-    fun selectById(tableName: String, id: Int, condition: Char): ArrayList<Any> {
+    fun selectById(tableName: String, id: Int, condition: Char): List<Application> {
 
         val conn = DriverManager.getConnection(db_url)
-
-        val returnList = ArrayList<Any>()
+        val retList = ArrayList<Application>()
         conn.use {
             val sql = ScriptsManager.selectByIdScriptTemplate.format(tableName, condition)
             val ps = it.prepareStatement(sql)
@@ -44,17 +43,24 @@ data class Connection(val db_url: String) {
             val rs = ps.executeQuery()
             val md = rs.metaData
             while (rs.next()) {
+                val resMap = HashMap<String, Any?>()
                 for (i in 1..md.columnCount) {
                     val type: Int = md.getColumnType(i)
                     if (type == Types.VARCHAR || type == Types.CHAR) {
-                        returnList.add(rs.getString(i))
+                        resMap[md.getColumnName(i)] = rs.getString(i)
                     } else {
-                        returnList.add(rs.getInt(i))
+                        resMap[md.getColumnName(i)] = rs.getInt(i)
                     }
                 }
+                if (tableName == "IDE")
+                    retList.add(IDEOf(resMap))
+                else if (tableName == "MediaViewer")
+                    retList.add(mediaViewerOf(resMap))
+                else if (tableName == "TextEditor")
+                    retList.add(textEditorOf(resMap))
             }
         }
-        return returnList
+        return retList
     }
 
 

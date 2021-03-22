@@ -8,8 +8,10 @@ abstract class Application(open val name: String, open val platform: Platform)
 
 // Class 1
 fun IDEOf(map: Map<String, Any?>) = IDE(
-    map["name"] as String, map["platform"] as Platform,
-    map["primaryLang"] as String?, map["isOpenSource"] as Boolean
+    map["name"] as String,
+    Platform.valueOf(map["platform"] as String),
+    map["primaryLang"] as String?, 
+    (map["isOpenSource"] as String).toBoolean()
 )
 
 data class IDE(
@@ -23,7 +25,7 @@ data class IDE(
 // Class 2
 fun textEditorOf(map: Map<String, Any?>) = TextEditor(
     map["name"] as String,
-    map["platform"] as Platform,
+    Platform.valueOf(map["platform"] as String),
     map["yearOfRelease"] as Int
 
 )
@@ -39,7 +41,7 @@ class TextEditor(
 
 fun mediaViewerOf(map: Map<String, Any?>) = MediaViewer(
     map["name"] as String,
-    map["platform"] as Platform,
+    Platform.valueOf(map["platform"] as String),
     map["createdBy"] as String
 )
 
