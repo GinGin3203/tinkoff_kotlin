@@ -25,9 +25,9 @@ data class Connection(val db_url: String) {
                 }
             }
             println("TABLES CREATED")
-            val rs = conn.getMetaData().getTables(null, null, null, null)
+            val rs = conn.metaData.getTables(null, null, null, null)
             while (rs.next()) {
-                println(rs.getString("TABLE_NAME"));
+                println(rs.getString("TABLE_NAME"))
             }
         }
     }
