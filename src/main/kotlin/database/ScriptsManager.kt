@@ -8,7 +8,7 @@ abstract class ScriptsManager {
     companion object {
 
         /*
-         * Не стал писать скрипты, а сделал генерацию через Reflection API. Было сложно, но зато я познакомился с
+         * Сделал генерацию через Reflection API настолько, насколько это было уместно (ы). Было сложно, но зато я познакомился с
          * Reflection API :)
          */
 
