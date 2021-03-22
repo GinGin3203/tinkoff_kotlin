@@ -56,6 +56,8 @@ abstract class ScriptsManager {
 
         const val selectByIdScriptTemplate: String = "select * from %s where id %c ?"
 
+        const val joinScriptTemplate: String = "select %s.%s %s.%s from %s %s %s on %s=%s"
+
         /**
         Мб не очень здорово заставлять порядок колонок зависеть от порядка названий полей, но джава не дает никаких
         гарантий о порядке полей в классе

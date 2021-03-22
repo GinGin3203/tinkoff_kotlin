@@ -7,6 +7,11 @@ enum class Platform {
 abstract class Application(open val name: String, open val platform: Platform)
 
 // Class 1
+fun IDEOf(map: Map<String, Any?>) = IDE(
+    map["name"] as String, map["platform"] as Platform,
+    map["primaryLang"] as String?, map["isOpenSource"] as Boolean
+)
+
 data class IDE(
     override val name: String,
     override val platform: Platform,
@@ -16,7 +21,14 @@ data class IDE(
     Application(name, platform)
 
 // Class 2
-data class TextEditor(
+fun textEditorOf(map: Map<String, Any?>) = TextEditor(
+    map["name"] as String,
+    map["platform"] as Platform,
+    map["yearOfRelease"] as Int
+
+)
+
+class TextEditor(
     override val name: String,
     override val platform: Platform,
     val yearOfRelease: Int
@@ -24,6 +36,13 @@ data class TextEditor(
     Application(name, platform)
 
 // Class 3
+
+fun mediaViewerOf(map: Map<String, Any?>) = MediaViewer(
+    map["name"] as String,
+    map["platform"] as Platform,
+    map["createdBy"] as String
+)
+
 data class MediaViewer(
     override val name: String,
     override val platform: Platform,
