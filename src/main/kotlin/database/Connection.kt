@@ -2,7 +2,6 @@ package database
 
 import domain_entities.TableContents
 import java.sql.DriverManager
-import java.sql.ResultSet
 import java.sql.Types
 
 data class Connection(val db_url: String) {
@@ -33,14 +32,14 @@ data class Connection(val db_url: String) {
         }
     }
 
-    fun selectById(tableName: String, id: Int): ArrayList<Any> {
+    fun selectById(tableName: String, id: Int, condition: Char): ArrayList<Any> {
 
         val conn = DriverManager.getConnection(db_url)
 
         val returnList = ArrayList<Any>()
         conn.use {
-            val sql = ScriptsManager.selectByIdScriptTemplate.replace(14, 16, tableName)
-            val ps = it.prepareStatement(sql.toString())
+            val sql = ScriptsManager.selectByIdScriptTemplate.format(tableName, condition)
+            val ps = it.prepareStatement(sql)
             ps.setInt(1, id)
             val rs = ps.executeQuery()
             val md = rs.metaData

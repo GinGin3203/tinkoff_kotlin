@@ -1,7 +1,6 @@
 package database
 
 import domain_entities.Application
-import kotlin.reflect.KType
 import kotlin.reflect.full.declaredMemberProperties
 
 abstract class ScriptsManager {
@@ -21,7 +20,11 @@ abstract class ScriptsManager {
             while (propIterator.hasNext()) {
                 val prop = propIterator.next()
                 this.append(prop.name)
-                this.append(" text") // давайте для простоты считать все строками
+                /*
+                    Давайте для простоты считать все поля классов строками. Я знаю, что это нехорошо,
+                    но пока давайте так
+                 */
+                this.append(" text")
                 this.append(if (propIterator.hasNext()) ",\n" else "\n);")
             }
         }
@@ -51,7 +54,7 @@ abstract class ScriptsManager {
             }
         }
 
-        val selectByIdScriptTemplate = StringBuilder("select * from TN where id = ?")
+        const val selectByIdScriptTemplate: String = "select * from %s where id %c ?"
 
         /**
         Мб не очень здорово заставлять порядок колонок зависеть от порядка названий полей, но джава не дает никаких
