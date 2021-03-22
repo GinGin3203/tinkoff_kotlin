@@ -6,8 +6,6 @@ enum class Platform {
 
 abstract class Application(open val name: String, open val platform: Platform)
 
-// Будем джойнить по полю Platform
-
 // Class 1
 data class IDE(
     override val name: String,

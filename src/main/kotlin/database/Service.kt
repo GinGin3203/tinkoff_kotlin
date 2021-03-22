@@ -1,7 +1,7 @@
 package database
 
 
-class Service(val connection: database.Connection) {
+class Service(private val connection: Connection) {
 
     fun selectFirst(tableName: String) = connection.selectById(tableName, 1, '=')
 
