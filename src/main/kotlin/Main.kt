@@ -5,6 +5,7 @@ fun main() {
     conn.initializeTables()
     val service = Service(conn)
     println(service.selectFirst("IDE"))
+    println(service.selectFirst("TextEditor"))
     println(service.selectAllWhichHaveLargerId("MediaViewer", 2))
     conn.clean()
 

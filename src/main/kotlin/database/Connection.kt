@@ -63,6 +63,7 @@ data class Connection(val db_url: String) {
         return retList
     }
 
+//    fun join(joinType: Service.JoinType): List<IDETextEditorJoined>
 
     fun clean() {
         val conn = DriverManager.getConnection(db_url)

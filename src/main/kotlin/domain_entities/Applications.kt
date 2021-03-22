@@ -10,7 +10,7 @@ abstract class Application(open val name: String, open val platform: Platform)
 fun IDEOf(map: Map<String, Any?>) = IDE(
     map["name"] as String,
     Platform.valueOf(map["platform"] as String),
-    map["primaryLang"] as String?, 
+    map["primaryLang"] as String?,
     (map["isOpenSource"] as String).toBoolean()
 )
 
@@ -26,11 +26,11 @@ data class IDE(
 fun textEditorOf(map: Map<String, Any?>) = TextEditor(
     map["name"] as String,
     Platform.valueOf(map["platform"] as String),
-    map["yearOfRelease"] as Int
+    (map["yearOfRelease"] as String).toInt()
 
 )
 
-class TextEditor(
+data class TextEditor(
     override val name: String,
     override val platform: Platform,
     val yearOfRelease: Int
@@ -51,3 +51,19 @@ data class MediaViewer(
     val createdBy: String
 ) :
     Application(name, platform)
+
+// Composite class for join
+fun IDETextEditorJoinedOf(map: Map<String, Any?>) = IDETextEditorJoined(
+    map["name"] as String,
+    Platform.valueOf(map["platform"] as String),
+    map["primaryLang"] as String?,
+    (map["isOpenSource"] as String).toBoolean(),
+    (map["yearOfRelease"] as String).toInt()
+)
+data class IDETextEditorJoined(
+    override val name: String,
+    override val platform: Platform,
+    val primaryLang: String?,
+    val isOpenSource: Boolean,
+    val yearOfRelease: Int
+) : Application(name, platform)
