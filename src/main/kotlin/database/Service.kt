@@ -8,10 +8,9 @@ class Service(private val connection: Connection) {
     fun selectAllWhichHaveLargerId(tableName: String, id: Int) = connection.selectById(tableName, id, '>')
 
     enum class JoinType {
-        INNER, OUTER
+        INNER, LEFT
     }
 
-//    fun textEditorAndIDEJoin(joinType: String) = connection.join(JoinType.valueOf(joinType))
-//
-//    fun textEditorAndIdeLeftJoin(joinType: String) = connection.leftJoin(JoinType.valueOf(joinType))
+//    fun textEditorAndIdeJoin(joinType: String) = connection.join(JoinType.valueOf(joinType))
+//    fun ideAndTextEditorJoin(joinType: String) = connection.join(JoinType.valueOf(joinType))
 }

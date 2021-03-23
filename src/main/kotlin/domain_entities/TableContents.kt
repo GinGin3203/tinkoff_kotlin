@@ -4,12 +4,12 @@ class TableContents {
     companion object {
         val tableData = listOf(
             listOf(
-                IDE("VSCode", Platform.MULTI, null, true),
-                IDE("IDEA", Platform.MULTI, "Java", false),
-                IDE("Visual Studio", Platform.WINDOWS, "C++", false),
-                IDE("XCode", Platform.MACOS, null, false),
-                IDE("Borland C++ Builder", Platform.WINDOWS, "C++", false),
-                IDE("Brackets", Platform.MACOS, "JavaScript", false)
+                Ide("VSCode", Platform.MULTI, null, true),
+                Ide("IDEA", Platform.MULTI, "Java", false),
+                Ide("Visual Studio", Platform.WINDOWS, "C++", false),
+                Ide("XCode", Platform.MACOS, null, false),
+                Ide("Borland C++ Builder", Platform.WINDOWS, "C++", false),
+                Ide("Brackets", Platform.MACOS, "JavaScript", false)
             ),
             listOf(
                 TextEditor("Vim", Platform.MULTI, 1991),

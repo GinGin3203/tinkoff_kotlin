@@ -54,6 +54,12 @@ abstract class ScriptsManager {
             }
         }
 
+        val joinTextEditorAndIdeScript: String =
+            "select * from TextEditor %s join Ide on TextEditor.Platform = Ide.Platform"
+
+        val joinIdeAndTextEditorScript: String =
+            "select * from Ide %s join TextEditor on TextEditor.Platform = Ide.Platform"
+
         const val selectByIdScriptTemplate: String = "select * from %s where id %c ?"
 
         const val joinScriptTemplate: String = "select %s.%s %s.%s from %s %s %s on %s=%s"
@@ -65,6 +71,6 @@ abstract class ScriptsManager {
         private fun <T : Application> getPropIterator(classObj: T) =
             classObj::class.declaredMemberProperties.sortedBy { it.name }.iterator()
 
-        val dropTablesScripts = listOf("drop table IDE;\n", "drop table TextEditor;\n", "drop table MediaViewer;")
+        val dropTablesScripts = listOf("drop table Ide;\n", "drop table TextEditor;\n", "drop table MediaViewer;")
     }
 }

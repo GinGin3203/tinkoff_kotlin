@@ -7,14 +7,14 @@ enum class Platform {
 abstract class Application(open val name: String, open val platform: Platform)
 
 // Class 1
-fun IDEOf(map: Map<String, Any?>) = IDE(
+fun ideOf(map: Map<String, Any?>) = Ide(
     map["name"] as String,
     Platform.valueOf(map["platform"] as String),
     map["primaryLang"] as String?,
     (map["isOpenSource"] as String).toBoolean()
 )
 
-data class IDE(
+data class Ide(
     override val name: String,
     override val platform: Platform,
     val primaryLang: String?,
@@ -53,14 +53,15 @@ data class MediaViewer(
     Application(name, platform)
 
 // Composite class for join
-fun IDETextEditorJoinedOf(map: Map<String, Any?>) = IDETextEditorJoined(
+fun ideTextEditorJoinedOf(map: Map<String, Any?>) = IdeTextEditorJoined(
     map["name"] as String,
     Platform.valueOf(map["platform"] as String),
     map["primaryLang"] as String?,
     (map["isOpenSource"] as String).toBoolean(),
     (map["yearOfRelease"] as String).toInt()
 )
-data class IDETextEditorJoined(
+
+data class IdeTextEditorJoined(
     override val name: String,
     override val platform: Platform,
     val primaryLang: String?,

@@ -52,8 +52,8 @@ data class Connection(val db_url: String) {
                         resMap[md.getColumnName(i)] = rs.getInt(i)
                     }
                 }
-                if (tableName == "IDE")
-                    retList.add(IDEOf(resMap))
+                if (tableName == "Ide")
+                    retList.add(ideOf(resMap))
                 else if (tableName == "MediaViewer")
                     retList.add(mediaViewerOf(resMap))
                 else if (tableName == "TextEditor")
@@ -62,8 +62,6 @@ data class Connection(val db_url: String) {
         }
         return retList
     }
-
-//    fun join(joinType: Service.JoinType): List<IDETextEditorJoined>
 
     fun clean() {
         val conn = DriverManager.getConnection(db_url)
