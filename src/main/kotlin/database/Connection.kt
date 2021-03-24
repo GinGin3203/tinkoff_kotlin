@@ -12,7 +12,7 @@ data class Connection(val db_url: String) {
     // для использования use с AutoCloseable нужно подключить либу в build.gradle,
     // см https://youtrack.jetbrains.com/issue/KT-41507
 
-    data class Response(val className: String, val data: Map<String, Any?>)
+    data class Response(val className: AllClasses, val data: Map<String, Any?>)
 
     fun initializeTables() {
         val conn = DriverManager.getConnection(db_url)
@@ -49,7 +49,7 @@ data class Connection(val db_url: String) {
                     resMap[md.getColumnName(i)] = rs.getInt(i)
                 }
             }
-            retList.add(Response(className, resMap))
+            retList.add(Response(AllClasses.valueOf(className), resMap))
         }
         return retList
     }
