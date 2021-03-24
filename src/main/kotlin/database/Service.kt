@@ -13,10 +13,10 @@ class Service(private val connection: Connection) {
     fun selectAllWhichHaveLargerId(tableName: TableClasses, id: Int): List<Application> =
         connection.selectById(tableName, id, '>').map { applicationOf(it) }
 
-    fun textEditorAndIdeJoin(joinType: JoinType): List<Application> =
+    fun joinTextEditorAndIdeOnPlatform(joinType: JoinType): List<Application> =
         connection.join(joinType, LeftTable.TextEditor).map { applicationOf(it) }
 
-    fun ideAndTextEditorJoin(joinType: JoinType): List<Application> =
+    fun joinIdeAndTextEditorOnPlatform(joinType: JoinType): List<Application> =
         connection.join(joinType, LeftTable.Ide).map { applicationOf(it) }
 
 }

@@ -17,13 +17,13 @@ fun main() {
     println(service.selectAllWhichHaveLargerId(TableClasses.MediaViewer, 2))
     println()
     println("INNER JOIN ON IDE AND TEXT EDITOR TABLES")
-    println(service.ideAndTextEditorJoin(JoinType.INNER))
+    println(service.joinIdeAndTextEditorOnPlatform(JoinType.INNER))
     println()
     println("LEFT JOIN WHERE LEFT IS TEXT EDITOR")
-    println(service.textEditorAndIdeJoin(JoinType.LEFT))
+    println(service.joinTextEditorAndIdeOnPlatform(JoinType.LEFT))
     println()
     println("LEFT JOIN WHERE LEFT IS IDE")
-    println(service.ideAndTextEditorJoin(JoinType.LEFT))
+    println(service.joinIdeAndTextEditorOnPlatform(JoinType.LEFT))
     conn.clean()
 
 }
