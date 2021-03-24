@@ -14,7 +14,7 @@ enum class Platform {
     WINDOWS, LINUX, MACOS, MULTI
 }
 
-abstract class Application(open val name: String, open val platform: Platform)
+abstract class Application(open val name: String?, open val platform: Platform?)
 
 // Class 1
 fun ideOf(map: Map<String, Any?>) = Ide(
@@ -64,19 +64,19 @@ data class MediaViewer(
 
 // Composite class for join
 fun ideTextEditorJoinedOf(map: Map<String, Any?>) = IdeTextEditorJoined(
-    map["name"] as String,
-    Platform.valueOf(map["platform"] as String),
+    map["name"] as String?,
+    if (map["platform"] != null) Platform.valueOf(map["platform"] as String) else null,
     map["primaryLang"] as String?,
-    (map["isOpenSource"] as String).toBoolean(),
-    (map["yearOfRelease"] as String).toInt()
+    (map["isOpenSource"] as String?)?.toBoolean(),
+    (map["yearOfRelease"] as String?)?.toInt()
 )
 
 data class IdeTextEditorJoined(
-    override val name: String,
-    override val platform: Platform,
+    override val name: String?,
+    override val platform: Platform?,
     val primaryLang: String?,
-    val isOpenSource: Boolean,
-    val yearOfRelease: Int
+    val isOpenSource: Boolean?,
+    val yearOfRelease: Int?
 ) : Application(name, platform)
 
 fun applicationOf(response: Connection.Response) = when (response.className) {
