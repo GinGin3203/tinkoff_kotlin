@@ -17,7 +17,8 @@ class TableContents {
                 TextEditor("Gedit", Platform.LINUX, 1999),
                 TextEditor("Notepad", Platform.WINDOWS, 1985),
                 TextEditor("Atom", Platform.MULTI, 2008),
-                TextEditor("Notepadqq", Platform.LINUX, 2012)
+                TextEditor("Notepadqq", Platform.LINUX, 2012),
+                TextEditor("TextEdit", Platform.MACOS, 1996)
             ),
             listOf(
                 MediaViewer("Windows Media Gallery", Platform.WINDOWS, "Microsoft"),
