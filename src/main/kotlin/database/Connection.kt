@@ -1,7 +1,6 @@
 package database
 
 import domain_entities.*
-import java.lang.IllegalArgumentException
 import java.sql.DriverManager
 import java.sql.ResultSet
 import java.sql.Types
@@ -66,31 +65,11 @@ data class Connection(val db_url: String) {
         }
     }
 
-
-    private enum class JoinType {
-        INNER, LEFT
-    }
-
-    private enum class LeftTable {
-        IDE, TEXTEDITOR
-    }
-
-    private fun convertJoinType(joinType: String) =
-        try {
-            val jt = JoinType.valueOf(joinType)
-            jt
-        } catch (e: IllegalArgumentException) {
-            println("joinType argument is incorrect. Available values: INNER or LEFT")
-            null
-        }
-
-    fun join(joinType: String, leftTable: String): List<Response>? {
+    fun join(joinType: JoinType, leftTable: LeftTable): List<Response> {
         val conn = DriverManager.getConnection(db_url)
         conn.use {
-            val lt = LeftTable.valueOf(leftTable)
-            val jt = convertJoinType(joinType) ?: return null
-            val sql = if (lt == LeftTable.IDE) ScriptsManager.joinIdeAndTextEditorScript.format(jt) else
-                ScriptsManager.joinTextEditorAndIdeScript.format(jt)
+            val sql = if (leftTable == LeftTable.Ide) ScriptsManager.joinIdeAndTextEditorScript.format(joinType) else
+                ScriptsManager.joinTextEditorAndIdeScript.format(joinType)
             val rs = it.prepareStatement(sql).executeQuery()
             return buildResponseList(rs, "IdeTextEditorJoined")
         }
