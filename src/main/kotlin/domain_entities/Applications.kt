@@ -1,5 +1,15 @@
 package domain_entities
 
+import database.Connection
+
+enum class TableClasses {
+    Ide, TextEditor, MediaViewer
+}
+
+enum class AllClasses {
+    Ide, TextEditor, MediaViewer, IdeTextEditorJoined
+}
+
 enum class Platform {
     WINDOWS, LINUX, MACOS, MULTI
 }
@@ -68,3 +78,11 @@ data class IdeTextEditorJoined(
     val isOpenSource: Boolean,
     val yearOfRelease: Int
 ) : Application(name, platform)
+
+fun applicationOf(response: Connection.Response) = when (AllClasses.valueOf(response.className)) {
+    AllClasses.Ide -> ideOf(response.data)
+    AllClasses.TextEditor -> textEditorOf(response.data)
+    AllClasses.MediaViewer -> mediaViewerOf(response.data)
+    AllClasses.IdeTextEditorJoined -> ideTextEditorJoinedOf(response.data)
+    else -> null
+}
