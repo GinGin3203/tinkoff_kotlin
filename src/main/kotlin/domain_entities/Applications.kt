@@ -63,15 +63,13 @@ fun mediaViewerOf(map: Map<String, Any?>) = MediaViewer(
 
 // Composite class for join
 data class IdeTextEditorJoined(
-    override val name: String?,
     override val platform: Platform?,
     val primaryLang: String?,
     val isOpenSource: Boolean?,
     val yearOfRelease: Int?
-) : Application(name, platform)
+) : Application("IdeAndTextEditorCompositeByJoin", platform)
 
 fun ideTextEditorJoinedOf(map: Map<String, Any?>) = IdeTextEditorJoined(
-    map["name"] as String?,
     if (map["platform"] != null) Platform.valueOf(map["platform"] as String) else null,
     map["primaryLang"] as String?,
     (map["isOpenSource"] as String?)?.toBoolean(),
@@ -82,7 +80,7 @@ data class IdeTextEditorGrouped(
     override val platform: Platform,
     val countIsOpenSource: Int,
     val maxYearOfRelease: Int
-) : Application("GroupedBy${platform}", platform)
+) : Application("IdeAndTextEditorCompositeGroupedBy${platform}", platform)
 
 fun ideTextEditorGroupedOf(map: Map<String, Any?>) = IdeTextEditorGrouped(
     Platform.valueOf(map["platform"] as String),
