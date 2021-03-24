@@ -35,7 +35,10 @@ data class Connection(val db_url: String) {
         }
     }
 
-    private fun buildResponseList(rs: ResultSet, className: String = rs.metaData.getTableName(1)): List<Response> {
+    private fun buildResponseList(
+        rs: ResultSet,
+        className: AllClasses = AllClasses.valueOf(rs.metaData.getTableName(1))
+    ): List<Response> {
         val retList = ArrayList<Response>()
         val md = rs.metaData
         while (rs.next()) {
@@ -48,12 +51,12 @@ data class Connection(val db_url: String) {
                     resMap[md.getColumnName(i)] = rs.getInt(i)
                 }
             }
-            retList.add(Response(AllClasses.valueOf(className), resMap))
+            retList.add(Response(className, resMap))
         }
         return retList
     }
 
-    fun selectById(tableName: TableClasses, id: Int, condition: Char): List<Response> {
+    fun mySelectById(tableName: TableClasses, id: Int, condition: Char): List<Response> {
 
         val conn = DriverManager.getConnection(db_url)
         conn.use {
@@ -65,13 +68,22 @@ data class Connection(val db_url: String) {
         }
     }
 
-    fun join(joinType: JoinType, leftTable: LeftTable): List<Response> {
+    fun myJoin(joinType: JoinType, leftTable: LeftTable): List<Response> {
         val conn = DriverManager.getConnection(db_url)
         conn.use {
             val sql = if (leftTable == LeftTable.Ide) ScriptsManager.joinIdeAndTextEditorScript.format(joinType) else
                 ScriptsManager.joinTextEditorAndIdeScript.format(joinType)
             val rs = it.prepareStatement(sql).executeQuery()
-            return buildResponseList(rs, "IdeTextEditorJoined")
+            return buildResponseList(rs, AllClasses.IdeTextEditorJoined)
+        }
+    }
+
+    fun myGroupBy(): List<Response> {
+        val conn = DriverManager.getConnection(db_url)
+        conn.use {
+            val sql = ScriptsManager.groupTextEditorAndIdeJoined
+            val rs = it.prepareStatement(sql).executeQuery()
+            return buildResponseList(rs, AllClasses.IdeTextEditorGrouped)
         }
     }
 

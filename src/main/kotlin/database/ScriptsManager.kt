@@ -70,12 +70,17 @@ abstract class ScriptsManager {
             classObj::class.declaredMemberProperties.sortedBy { it.name }.iterator()
 
         val joinTextEditorAndIdeScript: String =
-            "select * from TextEditor %s join Ide on TextEditor.Platform = Ide.Platform"
+            "select * from TextEditor %s join Ide on TextEditor.platform = Ide.platform"
 
         val joinIdeAndTextEditorScript: String =
-            "select * from Ide %s join TextEditor on TextEditor.Platform = Ide.Platform"
+            "select * from Ide %s join TextEditor on TextEditor.platform = Ide.platform"
 
         const val selectByIdScriptTemplate: String = "select * from %s where id %c ?"
+
+        val groupTextEditorAndIdeJoined = "select TextEditor.platform as platform, " +
+                "sum(case when Ide.isOpenSource = 'true' Then 1 else 0 end) " +
+                "as countIsOpenSource, max(cast(TextEditor.yearOfRelease as integer)) as maxYearOfRelease " +
+                "from Ide inner join TextEditor on TextEditor.platform = Ide.platform group by Ide.platform;"
 
         val dropTablesScripts = listOf("drop table Ide;\n", "drop table TextEditor;\n", "drop table MediaViewer;")
     }

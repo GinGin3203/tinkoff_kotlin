@@ -7,7 +7,7 @@ enum class TableClasses {
 }
 
 enum class AllClasses {
-    Ide, TextEditor, MediaViewer, IdeTextEditorJoined
+    Ide, TextEditor, MediaViewer, IdeTextEditorJoined, IdeTextEditorGrouped
 }
 
 enum class Platform {
@@ -17,13 +17,6 @@ enum class Platform {
 abstract class Application(open val name: String?, open val platform: Platform?)
 
 // Class 1
-fun ideOf(map: Map<String, Any?>) = Ide(
-    map["name"] as String,
-    Platform.valueOf(map["platform"] as String),
-    map["primaryLang"] as String?,
-    (map["isOpenSource"] as String).toBoolean()
-)
-
 data class Ide(
     override val name: String,
     override val platform: Platform,
@@ -32,14 +25,14 @@ data class Ide(
 ) :
     Application(name, platform)
 
-// Class 2
-fun textEditorOf(map: Map<String, Any?>) = TextEditor(
+fun ideOf(map: Map<String, Any?>) = Ide(
     map["name"] as String,
     Platform.valueOf(map["platform"] as String),
-    (map["yearOfRelease"] as String).toInt()
-
+    map["primaryLang"] as String?,
+    (map["isOpenSource"] as String).toBoolean()
 )
 
+// Class 2
 data class TextEditor(
     override val name: String,
     override val platform: Platform,
@@ -47,14 +40,14 @@ data class TextEditor(
 ) :
     Application(name, platform)
 
-// Class 3
-
-fun mediaViewerOf(map: Map<String, Any?>) = MediaViewer(
+fun textEditorOf(map: Map<String, Any?>) = TextEditor(
     map["name"] as String,
     Platform.valueOf(map["platform"] as String),
-    map["createdBy"] as String
+    (map["yearOfRelease"] as String).toInt()
+
 )
 
+// Class 3
 data class MediaViewer(
     override val name: String,
     override val platform: Platform,
@@ -62,15 +55,13 @@ data class MediaViewer(
 ) :
     Application(name, platform)
 
-// Composite class for join
-fun ideTextEditorJoinedOf(map: Map<String, Any?>) = IdeTextEditorJoined(
-    map["name"] as String?,
-    if (map["platform"] != null) Platform.valueOf(map["platform"] as String) else null,
-    map["primaryLang"] as String?,
-    (map["isOpenSource"] as String?)?.toBoolean(),
-    (map["yearOfRelease"] as String?)?.toInt()
+fun mediaViewerOf(map: Map<String, Any?>) = MediaViewer(
+    map["name"] as String,
+    Platform.valueOf(map["platform"] as String),
+    map["createdBy"] as String
 )
 
+// Composite class for join
 data class IdeTextEditorJoined(
     override val name: String?,
     override val platform: Platform?,
@@ -79,9 +70,30 @@ data class IdeTextEditorJoined(
     val yearOfRelease: Int?
 ) : Application(name, platform)
 
+fun ideTextEditorJoinedOf(map: Map<String, Any?>) = IdeTextEditorJoined(
+    map["name"] as String?,
+    if (map["platform"] != null) Platform.valueOf(map["platform"] as String) else null,
+    map["primaryLang"] as String?,
+    (map["isOpenSource"] as String?)?.toBoolean(),
+    (map["yearOfRelease"] as String?)?.toInt()
+)
+
+data class IdeTextEditorGrouped(
+    override val platform: Platform,
+    val countIsOpenSource: Int,
+    val maxYearOfRelease: Int
+) : Application("GroupedBy${platform}", platform)
+
+fun ideTextEditorGroupedOf(map: Map<String, Any?>) = IdeTextEditorGrouped(
+    Platform.valueOf(map["platform"] as String),
+    map["countIsOpenSource"] as Int,
+    map["maxYearOfRelease"] as Int
+)
+
 fun applicationOf(response: Connection.Response) = when (response.className) {
     AllClasses.Ide -> ideOf(response.data)
     AllClasses.TextEditor -> textEditorOf(response.data)
     AllClasses.MediaViewer -> mediaViewerOf(response.data)
     AllClasses.IdeTextEditorJoined -> ideTextEditorJoinedOf(response.data)
+    AllClasses.IdeTextEditorGrouped -> ideTextEditorGroupedOf(response.data)
 }
