@@ -87,6 +87,16 @@ data class Connection(val db_url: String) {
         }
     }
 
+    fun mySelectAndOrderDesc(): List<Response> {
+        val conn = DriverManager.getConnection(db_url)
+        conn.use {
+            val sql = ScriptsManager.selectMediaViewerAndOrderByRank
+            val rs = it.prepareStatement(sql).executeQuery()
+            return buildResponseList(rs)
+        }
+    }
+
+
     fun clean() {
         val conn = DriverManager.getConnection(db_url)
 

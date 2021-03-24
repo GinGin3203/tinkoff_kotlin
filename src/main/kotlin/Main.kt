@@ -37,6 +37,11 @@ fun main() {
     resList = service.groupTextEditorAndIdeByPlatform()
     println(resList)
     println(resList.size)
-    conn.clean()
+    println()
+    println("SELECT MEDIA VIEWERS AND SORT BY RANK IN DESCENDING ORDER")
+    resList = service.selectMediaViewersAndOrderByRankDesc()
+    println(resList)
+    println(resList.size)
 
+    conn.clean()
 }

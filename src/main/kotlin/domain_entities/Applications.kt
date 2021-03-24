@@ -51,14 +51,16 @@ fun textEditorOf(map: Map<String, Any?>) = TextEditor(
 data class MediaViewer(
     override val name: String,
     override val platform: Platform,
-    val createdBy: String
+    val createdBy: String,
+    val rankByReviews: Int
 ) :
     Application(name, platform)
 
 fun mediaViewerOf(map: Map<String, Any?>) = MediaViewer(
     map["name"] as String,
     Platform.valueOf(map["platform"] as String),
-    map["createdBy"] as String
+    map["createdBy"] as String,
+    (map["rankByReviews"] as String).toInt()
 )
 
 // Composite class for join

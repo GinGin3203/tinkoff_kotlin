@@ -22,12 +22,12 @@ class TableContents {
                 TextEditor("TextEdit", Platform.MACOS, 1996)
             ),
             listOf(
-                MediaViewer("Windows Media Gallery", Platform.WINDOWS, "Microsoft"),
-                MediaViewer("PhotoMoto", Platform.WINDOWS, "PhotoMoto"),
-                MediaViewer("VLC", Platform.MULTI, "VideoLAN"),
-                MediaViewer("MPV", Platform.LINUX, "mpv developers"),
-                MediaViewer("Elmedia", Platform.MACOS, "Eltima"),
-                MediaViewer("IINA", Platform.MACOS, "IINA Team")
+                MediaViewer("Windows Media Gallery", Platform.WINDOWS, "Microsoft", 9),
+                MediaViewer("PhotoMoto", Platform.WINDOWS, "PhotoMoto", 6),
+                MediaViewer("VLC", Platform.MULTI, "VideoLAN", 1),
+                MediaViewer("MPV", Platform.LINUX, "mpv developers", 10),
+                MediaViewer("Elmedia", Platform.MACOS, "Eltima", 5),
+                MediaViewer("IINA", Platform.MACOS, "IINA Team", 3)
             )
         )
     }

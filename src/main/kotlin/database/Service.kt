@@ -22,4 +22,6 @@ class Service(private val connection: Connection) {
 
     fun groupTextEditorAndIdeByPlatform(): List<Application> = connection.myGroupBy().map { applicationOf(it) }
 
+    fun selectMediaViewersAndOrderByRankDesc(): List<Application> =
+        connection.mySelectAndOrderDesc().map { applicationOf(it) }
 }
