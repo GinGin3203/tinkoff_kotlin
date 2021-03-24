@@ -13,7 +13,7 @@ fun main() {
     println("SELECTING FIRST OF TEXTEDITOR")
     println(service.selectFirst(TableClasses.TextEditor))
     println()
-    println("SELECTING FORM MEDIAVIEWER WHERE ID > 2")
+    println("SELECTING FROM MEDIAVIEWER WHERE ID > 2")
     println(service.selectAllWhichHaveLargerId(TableClasses.MediaViewer, 2))
     println()
     println("INNER JOIN ON IDE AND TEXT EDITOR TABLES")
