@@ -35,7 +35,7 @@ data class Connection(val db_url: String) {
         }
     }
 
-    private fun buildResponseList(rs: ResultSet, className: String = rs.getString("TABLE_NAME")): List<Response> {
+    private fun buildResponseList(rs: ResultSet, className: String = rs.metaData.getTableName(1)): List<Response> {
         val retList = ArrayList<Response>()
         val md = rs.metaData
         while (rs.next()) {
@@ -53,7 +53,7 @@ data class Connection(val db_url: String) {
         return retList
     }
 
-    fun selectById(tableName: String, id: Int, condition: Char): List<Response> {
+    fun selectById(tableName: TableClasses, id: Int, condition: Char): List<Response> {
 
         val conn = DriverManager.getConnection(db_url)
         conn.use {
