@@ -62,6 +62,13 @@ abstract class ScriptsManager {
             }
         }
 
+        /**
+        Мб не очень здорово заставлять порядок колонок зависеть от порядка названий полей, но джава не дает никаких
+        гарантий о порядке полей в классе
+         **/
+        private fun <T : Application> getPropIterator(classObj: T) =
+            classObj::class.declaredMemberProperties.sortedBy { it.name }.iterator()
+
         val joinTextEditorAndIdeScript: String =
             "select * from TextEditor %s join Ide on TextEditor.Platform = Ide.Platform"
 
@@ -69,15 +76,6 @@ abstract class ScriptsManager {
             "select * from Ide %s join TextEditor on TextEditor.Platform = Ide.Platform"
 
         const val selectByIdScriptTemplate: String = "select * from %s where id %c ?"
-
-        const val joinScriptTemplate: String = "select %s.%s %s.%s from %s %s %s on %s=%s"
-
-        /**
-        Мб не очень здорово заставлять порядок колонок зависеть от порядка названий полей, но джава не дает никаких
-        гарантий о порядке полей в классе
-         **/
-        private fun <T : Application> getPropIterator(classObj: T) =
-            classObj::class.declaredMemberProperties.sortedBy { it.name }.iterator()
 
         val dropTablesScripts = listOf("drop table Ide;\n", "drop table TextEditor;\n", "drop table MediaViewer;")
     }
