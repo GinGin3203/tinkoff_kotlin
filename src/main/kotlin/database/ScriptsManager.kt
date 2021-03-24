@@ -3,6 +3,14 @@ package database
 import domain_entities.Application
 import kotlin.reflect.full.declaredMemberProperties
 
+enum class LeftTable {
+    Ide, TextEditor
+}
+
+enum class JoinType {
+    INNER, LEFT
+}
+
 abstract class ScriptsManager {
 
     companion object {
