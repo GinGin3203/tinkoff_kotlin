@@ -9,7 +9,8 @@ class TableContents {
                 Ide("Visual Studio", Platform.WINDOWS, "C++", false),
                 Ide("XCode", Platform.MACOS, null, false),
                 Ide("Borland C++ Builder", Platform.WINDOWS, "C++", false),
-                Ide("Brackets", Platform.MACOS, "JavaScript", false)
+                Ide("Brackets", Platform.MACOS, "JavaScript", false),
+                Ide("QT Creator", Platform.LINUX, "QT", true)
             ),
             listOf(
                 TextEditor("Vim", Platform.MULTI, 1991),
