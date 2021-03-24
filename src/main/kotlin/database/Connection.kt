@@ -12,6 +12,8 @@ data class Connection(val db_url: String) {
     // для использования use с AutoCloseable нужно подключить либу в build.gradle,
     // см https://youtrack.jetbrains.com/issue/KT-41507
 
+    data class Response(val className: String, val data: Map<String, Any?>)
+
     fun initializeTables() {
         val conn = DriverManager.getConnection(db_url)
         conn.use {
@@ -34,8 +36,8 @@ data class Connection(val db_url: String) {
         }
     }
 
-    private fun buildRawResponseFromResultSet(rs: ResultSet): List<Map<String, Any?>> {
-        val retList = ArrayList<HashMap<String, Any?>>()
+    private fun buildResponseList(rs: ResultSet, className: String = rs.getString("TABLE_NAME")): List<Response> {
+        val retList = ArrayList<Response>()
         val md = rs.metaData
         while (rs.next()) {
             val resMap = HashMap<String, Any?>()
@@ -47,12 +49,12 @@ data class Connection(val db_url: String) {
                     resMap[md.getColumnName(i)] = rs.getInt(i)
                 }
             }
-            retList.add(resMap)
+            retList.add(Response(className, resMap))
         }
         return retList
     }
 
-    fun selectById(tableName: String, id: Int, condition: Char): List<Map<String, Any?>> {
+    fun selectById(tableName: String, id: Int, condition: Char): List<Response> {
 
         val conn = DriverManager.getConnection(db_url)
         conn.use {
@@ -60,7 +62,7 @@ data class Connection(val db_url: String) {
             val ps = it.prepareStatement(sql)
             ps.setInt(1, id)
             val rs = ps.executeQuery()
-            return buildRawResponseFromResultSet(rs)
+            return buildResponseList(rs)
         }
     }
 
@@ -82,7 +84,7 @@ data class Connection(val db_url: String) {
             null
         }
 
-    fun join(joinType: String, leftTable: String): List<Map<String, Any?>>? {
+    fun join(joinType: String, leftTable: String): List<Response>? {
         val conn = DriverManager.getConnection(db_url)
         conn.use {
             val lt = LeftTable.valueOf(leftTable)
@@ -90,7 +92,7 @@ data class Connection(val db_url: String) {
             val sql = if (lt == LeftTable.IDE) ScriptsManager.joinIdeAndTextEditorScript.format(jt) else
                 ScriptsManager.joinTextEditorAndIdeScript.format(jt)
             val rs = it.prepareStatement(sql).executeQuery()
-            return buildRawResponseFromResultSet(rs)
+            return buildResponseList(rs, "IdeTextEditorJoined")
         }
     }
 
