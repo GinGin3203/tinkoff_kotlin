@@ -2,7 +2,7 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 import java.util.concurrent.TimeUnit
 
-class BirthdayReminder(val dateOfBirth: LocalDate) {
+class BirthdayReminderer(val dateOfBirth: LocalDate) {
     private lateinit var closestBirthday: LocalDate
 
     private fun initializeClosestBirthday(date: LocalDate): LocalDate {
