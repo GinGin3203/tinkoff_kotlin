@@ -82,8 +82,10 @@ abstract class ScriptsManager {
                 "as countIsOpenSource, max(cast(TextEditor.yearOfRelease as integer)) as maxYearOfRelease " +
                 "from Ide inner join TextEditor on TextEditor.platform = Ide.platform group by Ide.platform;"
 
-        val selectMediaViewerAndOrderByRank= "select * from MediaViewer order by cast(rankByReviews as integer) desc;"
+        val selectMediaViewerAndOrderByRank = "select * from MediaViewer order by cast(rankByReviews as integer) desc;"
 
         val dropTablesScripts = listOf("drop table Ide;\n", "drop table TextEditor;\n", "drop table MediaViewer;")
+
+        val syntaxErrorProducingScript = "elect * from Ide"
     }
 }
