@@ -20,10 +20,10 @@ fun readByMultipleThreads(value: AtomicInteger) {
         }
     }
 
-    val writingThread = thread(name = "WRITER") {
-        for (i in 1..10) {
+    thread(name = "WRITER") {
+        repeat(10) {
             println("${Thread.currentThread().name} updating value")
-            obs.update { incrementAndGet() }
+            obs.update { set(value.incrementAndGet()) }
         }
     }
 

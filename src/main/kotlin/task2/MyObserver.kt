@@ -1,16 +1,17 @@
 package main.task2
 
 import java.util.concurrent.ConcurrentLinkedQueue
+import java.util.concurrent.atomic.AtomicInteger
 
 interface Observer {
-    fun onObservableChanged(newVal: Int)
+    fun onObservableChanged(newVal: AtomicInteger)
 }
 
 class MyObserver : Runnable, Observer {
     val updates = ConcurrentLinkedQueue<Int>()
 
-    override fun onObservableChanged(newVal: Int) {
-        updates.add(newVal)
+    override fun onObservableChanged(newVal: AtomicInteger) {
+        updates.add(newVal.get())
     }
 
     override fun run() {
