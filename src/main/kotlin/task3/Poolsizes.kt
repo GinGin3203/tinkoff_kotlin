@@ -22,7 +22,8 @@ fun comparePoolsizes() {
             }
         }
         pool.shutdown()
-        measurements.add(Pair<Int, Long>(size, System.nanoTime() - startTime))
+        val endTime = System.nanoTime()
+        measurements.add(Pair<Int, Long>(size, endTime - startTime))
     }
     measurements.sortedBy { it.second }.forEach {
         println(
