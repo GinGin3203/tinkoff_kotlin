@@ -1,12 +1,24 @@
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import domain_entities.AuthorAndBooks
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
+import services.AuthorInfoProvider
+import services.AvailableBooksProvider
 
-fun main() {
-    GlobalScope.launch { // launch a new coroutine in background and continue
-        delay(1000L) // non-blocking delay for 1 second (default time unit is ms)
-        println("World!") // print after delay
+fun main() = runBlocking {
+
+    val authorsDef = async { AuthorInfoProvider.getAllData() }
+    val booksDef = async { AvailableBooksProvider.getAllData() }
+
+    val authors = authorsDef.await()
+    val books = booksDef.await()
+
+    val joinedData = authors.mapNotNull { author ->
+        books.firstOrNull { it.authorName == author.name }?.let { authorBooksData ->
+            AuthorAndBooks(
+                author.name, author.yearOfBirth, authorBooksData.books
+            )
+        }
     }
-    println("Hello,") // main thread continues while coroutine is delayed
-    Thread.sleep(2000L) // block main thread for 2 seconds to keep JVM alive
+
+    println(joinedData)
 }
