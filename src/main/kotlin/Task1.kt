@@ -9,11 +9,8 @@ fun getConcurrentlyAndJoin() = runBlocking {
     val authorsDef = async { AuthorInfoProvider.getAllData() }
     val booksDef = async { AvailableBooksProvider.getAllData() }
 
-    val authors = authorsDef.await()
-    val books = booksDef.await()
-
-    val joinedData = authors.mapNotNull { author ->
-        books.firstOrNull { it.authorName == author.name }?.let { authorBooksData ->
+    val joinedData = authorsDef.await().mapNotNull { author ->
+        booksDef.await().firstOrNull { it.authorName == author.name }?.let { authorBooksData ->
             AuthorAndBooks(
                 author.name, author.yearOfBirth, authorBooksData.books
             )
