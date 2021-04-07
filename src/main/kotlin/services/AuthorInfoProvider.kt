@@ -19,7 +19,7 @@ class AuthorInfoProvider {
         fun getAllData() = data
 
         fun generateEvents() = GlobalScope.produce {
-            Thread.currentThread().name = "MyProducer"
+            Thread.currentThread().name = "ProducingThread"
             for (entry in data) {
                 println("${Thread.currentThread().name} is sending")
                 delay(1000L)
