@@ -18,7 +18,6 @@ class AuthorInfoProvider {
 
         fun getAllData() = data
 
-        @kotlinx.coroutines.ExperimentalCoroutinesApi
         fun generateEvents() = GlobalScope.produce {
             Thread.currentThread().name = "MyProducer"
             for (entry in data) {
