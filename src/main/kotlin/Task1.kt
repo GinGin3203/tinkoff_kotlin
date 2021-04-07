@@ -30,7 +30,7 @@ fun getConcurrentlyAndJoin() = runBlocking {
     }
 
     println(
-        "Concurrent execution should take about ~1000ms. Actual time: ${endTime - startTime}"
+        "Concurrent execution should take about ~1s. Actual time: ${endTime - startTime}"
     )
     println(joinedData)
 }
