@@ -1,6 +1,9 @@
 package services
 
 import domain_entities.AuthorInfo
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.delay
 
 class AuthorInfoProvider {
 
@@ -14,5 +17,16 @@ class AuthorInfoProvider {
         )
 
         fun getAllData() = data
+
+        @kotlinx.coroutines.ExperimentalCoroutinesApi
+        fun generateEvents() = GlobalScope.produce {
+            Thread.currentThread().name = "MyProducer"
+            for (entry in data) {
+                println("${Thread.currentThread().name} is sending")
+                delay(1000L)
+                send(entry)
+            }
+        }
+
     }
 }
